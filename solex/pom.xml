@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>cn.com.solex</groupId>
+	<artifactId>solex</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>Solex's Project</name>
+	<modules>
+		<module>solex-parent</module>
+		<module>solex-core</module>
+		<module>solex-ljump</module>
+	</modules>
+</project>
