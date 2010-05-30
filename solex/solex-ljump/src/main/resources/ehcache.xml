@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache>
+
+	<diskStore path="java.io.tmpdir/hibernate/ljump" />
+
+
+	<!-- DefaultCache setting. -->
+	<defaultCache maxElementsInMemory="10000"
+		memoryStoreEvictionPolicy="LRU" eternal="false" timeToIdleSeconds="300"
+		timeToLiveSeconds="300" overflowToDisk="false" diskPersistent="false" />
+
+	<!-- Special objects setting. -->
+	<!-- Refresh ContentInfoCache every hour. -->
+	<cache name="contentInfoCache" overflowToDisk="false" eternal="false"
+		diskPersistent="false" timeToLiveSeconds="3600" timeToIdleSeconds="3600"
+		maxElementsInMemory="10000" memoryStoreEvictionPolicy="LRU" />
+
+	<cache name="cn.com.solex.ljump.entity.system.SysUser"
+		maxElementsInMemory="10000" memoryStoreEvictionPolicy="LRU" eternal="true"
+		diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="1000000" />
+	<cache name="cn.com.solex.ljump.entity.system.SysUser.roleList"
+		maxElementsInMemory="10000" memoryStoreEvictionPolicy="LRU" eternal="true"
+		diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="1000000" />
+	<cache name="cn.com.solex.ljump.entity.system.SysRole"
+		maxElementsInMemory="10000" memoryStoreEvictionPolicy="LRU" eternal="true"
+		diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="1000000" />
+	<cache name="cn.com.solex.ljump.entity.system.SysRole.authorityList"
+		maxElementsInMemory="10000" memoryStoreEvictionPolicy="LRU" eternal="true"
+		diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="1000000" />
+	<cache name="cn.com.solex.ljump.entity.system.SysAuthority"
+		maxElementsInMemory="10000" memoryStoreEvictionPolicy="LRU" eternal="true"
+		diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="1000000" />
+	<cache name="cn.com.solex.ljump.entity.system.SysResource"
+		maxElementsInMemory="10000" memoryStoreEvictionPolicy="LRU" eternal="true"
+		diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="1000000" />
+	<cache name="cn.com.solex.ljump.entity.system.SysResource.authorityList"
+		maxElementsInMemory="10000" memoryStoreEvictionPolicy="LRU" eternal="true"
+		diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="1000000" />
+</ehcache>

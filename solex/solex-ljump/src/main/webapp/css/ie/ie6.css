@@ -1,0 +1,76 @@
+#page-content,.button .expand,.ui-dialog .ui-dialog-titlebar-close,.ui-dialog .ui-dialog-content,.ui-dialog-content .content,.listTable tbody a,ul.ui-tabs-nav,#header .container,#innerContent,#titleActions,#toolbarActions,#toolbarActions ul,#listHeader,.ui-tabs-nav,.ui-tabs-nav li,.ui-tabs-nav li a
+	{
+	zoom: 1;
+}
+
+.newPost {
+	width: 131px;
+}
+
+.container {
+	width: 980px;
+}
+
+.button {
+	height: 29px;
+}
+
+#innerContent {
+	width: 675px;
+}
+
+.content form legend {
+	margin: 0px -8px 16px 0;
+	padding: 0;
+}
+
+#login #innerContent {
+	width: 300px;
+}
+
+#side-nav ul {
+	margin-top: 10px;
+	zoom: 1;
+}
+
+#side-nav ul li {
+	line-height: 1;
+	zoom: 1;
+}
+
+#title h2 {
+	position: relative;
+	left: 0px;
+}
+
+.fieldset {
+	clear: both;
+}
+
+ul.ui-tabs-nav {
+	float: none;
+	margin: 0;
+	padding-left: 20px;
+	background: #a5948a;
+}
+
+.ui-tabs-nav li {
+	display: block;
+	float: left;
+}
+
+.ui-tabs-nav li a {
+	display: block;
+	float: left;
+}
+
+.ui-tabs-nav li a span {
+	display: block;
+	float: left;
+}
+
+.ui-dialog .ui-dialog-titlebar-close {
+	top: 17px;
+	text-indent: 0px;
+	color: #fff;
+}
