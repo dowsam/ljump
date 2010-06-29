@@ -5,9 +5,11 @@
 		<artifactId>solex-parent</artifactId>
 		<groupId>cn.com.solex</groupId>
 		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>.../solex-parent/pom.xml</relativePath>
 	</parent>
 	<groupId>cn.com.solex</groupId>
 	<artifactId>solex-ljump</artifactId>
+	<name>Solex's Ljump</name>
 	<packaging>war</packaging>
 
 	<!-- 项目属性 -->
@@ -356,7 +358,6 @@
 	</dependencies>
 
 	<build>
-		<finalName>${pom.name}</finalName>
 		<plugins>
 			<!-- eclipse插件 -->
 			<plugin>
