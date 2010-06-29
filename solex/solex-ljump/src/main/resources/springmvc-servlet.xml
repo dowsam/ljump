@@ -9,7 +9,7 @@
 
 	<context:component-scan base-package="cn.com.solex.ljump.controller" />
 	<mvc:annotation-driven />
-	<!-- <mvc:view-controller path="/" view-name="/welcome" /> -->
+	<mvc:view-controller path="/" view-name="/welcome" />
 
 	<!-- Configures Handler Interceptors -->
 	<mvc:interceptors>
