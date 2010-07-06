@@ -92,6 +92,12 @@
 			<optional>true</optional>
 		</dependency>
 
+		<!-- quartz -->
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz</artifactId>
+		</dependency>
+
 		<!-- utils -->
 		<dependency>
 			<groupId>net.sf.dozer</groupId>
@@ -124,7 +130,7 @@
 			<optional>true</optional>
 		</dependency>
 		<!-- logging -->
-		
+
 		<dependency>
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>
@@ -231,7 +237,7 @@
 			<artifactId>jbpm-jpdl</artifactId>
 			<optional>true</optional>
 		</dependency>
-		
+
 	</dependencies>
 
 	<build>
