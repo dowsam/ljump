@@ -150,6 +150,11 @@
 		</dependency>
 		<!-- webservice end -->
 
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+		</dependency>
+
 		<!-- security begin -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
@@ -214,7 +219,7 @@
 		</dependency>
 		<!-- email end -->
 
-		<!-- utils begin-->
+		<!-- utils begin -->
 		<dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
@@ -258,7 +263,7 @@
 		</dependency>
 		<!-- utils end -->
 
-		<!--  xml begin -->
+		<!-- xml begin -->
 		<dependency>
 			<groupId>com.sun.xml.bind</groupId>
 			<artifactId>jaxb-impl</artifactId>
@@ -273,7 +278,7 @@
 			<groupId>jaxen</groupId>
 			<artifactId>jaxen</artifactId>
 		</dependency>
-		<!--  xml end -->
+		<!-- xml end -->
 
 		<!-- poi begin -->
 		<dependency>
