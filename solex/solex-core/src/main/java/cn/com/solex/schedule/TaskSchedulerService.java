@@ -6,7 +6,6 @@ import org.quartz.CronTrigger;
 import org.quartz.JobDetail;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
-import org.quartz.SchedulerFactory;
 import org.quartz.SimpleTrigger;
 import org.quartz.Trigger;
 import org.quartz.TriggerUtils;
@@ -21,20 +20,14 @@ import cn.com.solex.exception.AppRuntimeException;
  * 
  */
 public final class TaskSchedulerService {
-	private SchedulerFactory schedulerFactory;
 	private Scheduler theScheduler;
 
-	public void setSchedulerFactory(SchedulerFactory schedulerFactory) {
-		this.schedulerFactory = schedulerFactory;
-		try {
-			this.theScheduler = this.schedulerFactory.getScheduler();
-		} catch (SchedulerException e) {
-			throw new AppRuntimeException(e);
-		}
+	public void setTheScheduler(Scheduler theScheduler) {
+		this.theScheduler = theScheduler;
 	}
 
-	public SchedulerFactory getSchedulerFactory() {
-		return schedulerFactory;
+	public Scheduler getTheScheduler() {
+		return theScheduler;
 	}
 
 	/**
@@ -88,6 +81,8 @@ public final class TaskSchedulerService {
 	 *            任务名称
 	 * @param timeExpression
 	 *            计划时间表达式
+	 * @param description
+	 *            任务描述
 	 * 
 	 *            <pre>
 	 * A "Time-Expression" is a string comprised of 6 or 7 fields separated by white space. The 6 mandatory and 1 optional fields are as follows:
@@ -132,12 +127,13 @@ public final class TaskSchedulerService {
 	 * 	   Pay attention to the effects of '?' and '*' in the day-of-week and day-of-month fields!
 	 * </pre>
 	 */
-	public void schedule(Class<?> appTaskClass, String taskName,
-			String timeExpression) {
+	public <T extends AbstractAppTask> void schedule(Class<T> appTaskClass,
+			String taskName, String description, String timeExpression) {
 		JobDetail jd = new JobDetail();
 		jd.setGroup(Scheduler.DEFAULT_GROUP);
 		jd.setJobClass(appTaskClass);
 		jd.setName(taskName);
+		jd.setDescription(description);
 		CronTrigger ct = new CronTrigger();
 		ct.setName(new UIDGenerator().generate());
 		ct.setJobName(taskName);
@@ -159,17 +155,21 @@ public final class TaskSchedulerService {
 	 *            AppTask任务类
 	 * @param taskName
 	 *            任务名称
+	 * @param description
+	 *            任务描述
 	 * @param hour
 	 *            （0－23）小时
 	 * @param minute
 	 *            （0－59）分钟
 	 */
-	public void scheduleDialy(Class<AbstractAppTask> appTaskClass,
-			String taskName, int hour, int minute) {
+	public <T extends AbstractAppTask> void scheduleDialy(
+			Class<T> appTaskClass, String taskName, String description,
+			int hour, int minute) {
 		JobDetail jd = new JobDetail();
 		jd.setGroup(Scheduler.DEFAULT_GROUP);
 		jd.setJobClass(appTaskClass);
 		jd.setName(taskName);
+		jd.setDescription(description);
 		Trigger trigger = TriggerUtils.makeDailyTrigger(
 				new UIDGenerator().generate(), hour, minute);
 		trigger.setJobName(taskName);
@@ -187,7 +187,8 @@ public final class TaskSchedulerService {
 	 * @param appTaskClass
 	 *            任务类
 	 * @param taskName
-	 *            任务名称
+	 *            任务名称 description 任务描述
+	 * @param
 	 * @param dayOfWeek
 	 *            （1－7）星期
 	 * @param hour
@@ -195,12 +196,14 @@ public final class TaskSchedulerService {
 	 * @param minute
 	 *            （0－59）分钟
 	 */
-	public void scheduleWeekly(Class<AbstractAppTask> appTaskClass,
-			String taskName, int dayOfWeek, int hour, int minute) {
+	public <T extends AbstractAppTask> void scheduleWeekly(
+			Class<T> appTaskClass, String taskName, String description,
+			int dayOfWeek, int hour, int minute) {
 		JobDetail jd = new JobDetail();
 		jd.setGroup(Scheduler.DEFAULT_GROUP);
 		jd.setJobClass(appTaskClass);
 		jd.setName(taskName);
+		jd.setDescription(description);
 		Trigger trigger = TriggerUtils.makeWeeklyTrigger(
 				new UIDGenerator().generate(), dayOfWeek, hour, minute);
 		trigger.setJobName(taskName);
@@ -219,6 +222,8 @@ public final class TaskSchedulerService {
 	 *            任务类
 	 * @param taskName
 	 *            任务名称
+	 * @param description
+	 *            任务描述
 	 * @param dayOfMonth
 	 *            (1-31, or -1)月内某日
 	 * @param hour
@@ -226,12 +231,14 @@ public final class TaskSchedulerService {
 	 * @param minute
 	 *            （0－59）分钟
 	 */
-	public void scheduleMonthly(Class<AbstractAppTask> appTaskClass,
-			String taskName, int dayOfMonth, int hour, int minute) {
+	public <T extends AbstractAppTask> void scheduleMonthly(
+			Class<T> appTaskClass, String taskName, String description,
+			int dayOfMonth, int hour, int minute) {
 		JobDetail jd = new JobDetail();
 		jd.setGroup(Scheduler.DEFAULT_GROUP);
 		jd.setJobClass(appTaskClass);
 		jd.setName(taskName);
+		jd.setDescription(description);
 		Trigger trigger = TriggerUtils.makeMonthlyTrigger(
 				new UIDGenerator().generate(), dayOfMonth, hour, minute);
 		trigger.setJobName(taskName);
@@ -250,17 +257,21 @@ public final class TaskSchedulerService {
 	 *            任务类
 	 * @param taskName
 	 *            任务名
+	 * @param description
+	 *            任务描述
 	 * @param repeatCount
 	 *            重复次数
 	 * @param repeatInterval
 	 *            执行间隔 ms毫秒
 	 */
-	public void scheduleImmediate(Class<AbstractAppTask> appTaskClass,
-			String taskName, int repeatCount, long repeatInterval) {
+	public <T extends AbstractAppTask> void scheduleImmediate(
+			Class<T> appTaskClass, String taskName, String description,
+			int repeatCount, long repeatInterval) {
 		JobDetail jd = new JobDetail();
 		jd.setGroup(Scheduler.DEFAULT_GROUP);
 		jd.setJobClass(appTaskClass);
 		jd.setName(taskName);
+		jd.setDescription(description);
 		Trigger trigger = TriggerUtils.makeImmediateTrigger(
 				new UIDGenerator().generate(), repeatCount, repeatInterval);
 		trigger.setJobName(taskName);
@@ -279,18 +290,22 @@ public final class TaskSchedulerService {
 	 *            任务类
 	 * @param taskName
 	 *            任务名称
+	 * @param description
+	 *            任务描述
 	 * @param intervalInHours
 	 *            时间间隔，单位小时，整数
 	 */
-	public void scheduleHourly(Class<AbstractAppTask> appTaskClass,
-			String taskName, int intervalInHours) {
+	public <T extends AbstractAppTask> void scheduleHourly(
+			Class<T> appTaskClass, String taskName, String description,
+			int intervalInHours) {
 		JobDetail jd = new JobDetail();
 		jd.setGroup(Scheduler.DEFAULT_GROUP);
 		jd.setJobClass(appTaskClass);
 		jd.setName(taskName);
+		jd.setDescription(description);
 		Trigger trigger = TriggerUtils.makeHourlyTrigger(intervalInHours);
+		trigger.setName(new UIDGenerator().generate());
 		trigger.setJobName(taskName);
-		trigger.setGroup(new UIDGenerator().generate());
 		trigger.setGroup(Scheduler.DEFAULT_GROUP);
 		try {
 			this.theScheduler.scheduleJob(jd, trigger);
@@ -306,17 +321,21 @@ public final class TaskSchedulerService {
 	 *            任务类
 	 * @param taskName
 	 *            任务名称
+	 * @param description
+	 *            任务描述
 	 * @param intervalInHours
 	 *            时间间隔，单位小时，整数
 	 * @param repeatCount
 	 *            重复次数
 	 */
-	public void scheduleHourly(Class<AbstractAppTask> appTaskClass,
-			String taskName, int intervalInHours, int repeatCount) {
+	public <T extends AbstractAppTask> void scheduleHourly(
+			Class<T> appTaskClass, String taskName, String description,
+			int intervalInHours, int repeatCount) {
 		JobDetail jd = new JobDetail();
 		jd.setGroup(Scheduler.DEFAULT_GROUP);
 		jd.setJobClass(appTaskClass);
 		jd.setName(taskName);
+		jd.setDescription(description);
 		Trigger trigger = TriggerUtils.makeHourlyTrigger(
 				new UIDGenerator().generate(), intervalInHours, repeatCount);
 		trigger.setJobName(taskName);
@@ -335,17 +354,21 @@ public final class TaskSchedulerService {
 	 *            任务类
 	 * @param taskName
 	 *            任务名称
+	 * @param description
+	 *            任务描述
 	 * @param intervalInHours
 	 *            时间间隔，单位分钟，整数
 	 * @param repeatCount
 	 *            重复次数
 	 */
-	public void scheduleMinutely(Class<AbstractAppTask> appTaskClass,
-			String taskName, int intervalInMinutes, int repeatCount) {
+	public <T extends AbstractAppTask> void scheduleMinutely(
+			Class<T> appTaskClass, String taskName, String description,
+			int intervalInMinutes, int repeatCount) {
 		JobDetail jd = new JobDetail();
 		jd.setGroup(Scheduler.DEFAULT_GROUP);
 		jd.setJobClass(appTaskClass);
 		jd.setName(taskName);
+		jd.setDescription(description);
 		Trigger trigger = TriggerUtils.makeImmediateTrigger(
 				new UIDGenerator().generate(), intervalInMinutes, repeatCount);
 		trigger.setJobName(taskName);
@@ -364,15 +387,19 @@ public final class TaskSchedulerService {
 	 *            任务类
 	 * @param taskName
 	 *            任务名称
+	 * @param description
+	 *            任务描述
 	 * @param intervalInHours
 	 *            时间间隔，单位分钟，整数
 	 */
-	public void scheduleMinutely(Class<AbstractAppTask> appTaskClass,
-			String taskName, int intervalInMinutes) {
+	public <T extends AbstractAppTask> void scheduleMinutely(
+			Class<T> appTaskClass, String taskName, String description,
+			int intervalInMinutes) {
 		JobDetail jd = new JobDetail();
 		jd.setGroup(Scheduler.DEFAULT_GROUP);
 		jd.setJobClass(appTaskClass);
 		jd.setName(taskName);
+		jd.setDescription(description);
 		Trigger trigger = TriggerUtils.makeMinutelyTrigger(intervalInMinutes);
 		trigger.setName(new UIDGenerator().generate());
 		trigger.setJobName(taskName);
@@ -391,17 +418,21 @@ public final class TaskSchedulerService {
 	 *            任务类
 	 * @param taskName
 	 *            任务名称
+	 * @param description
+	 *            任务描述
 	 * @param intervalInHours
 	 *            时间间隔，单位秒，整数
 	 * @param repeatCount
 	 *            重复次数
 	 */
-	public void scheduleSecondly(Class<AbstractAppTask> appTaskClass,
-			String taskName, int intervalInSeconds, int repeatCount) {
+	public <T extends AbstractAppTask> void scheduleSecondly(
+			Class<T> appTaskClass, String taskName, String description,
+			int intervalInSeconds, int repeatCount) {
 		JobDetail jd = new JobDetail();
 		jd.setGroup(Scheduler.DEFAULT_GROUP);
 		jd.setJobClass(appTaskClass);
 		jd.setName(taskName);
+		jd.setDescription(description);
 		SimpleTrigger trigger = new SimpleTrigger(
 				new UIDGenerator().generate(), Scheduler.DEFAULT_GROUP);
 		trigger.setRepeatInterval(intervalInSeconds * 1000l);
@@ -421,15 +452,19 @@ public final class TaskSchedulerService {
 	 *            任务类
 	 * @param taskName
 	 *            任务名称
+	 * @param description
+	 *            任务描述
 	 * @param intervalInHours
 	 *            时间间隔，单位秒，整数
 	 */
-	public void scheduleSecondly(Class<AbstractAppTask> appTaskClass,
-			String taskName, int intervalInSeconds) {
+	public <T extends AbstractAppTask> void scheduleSecondly(
+			Class<T> appTaskClass, String taskName, String description,
+			int intervalInSeconds) {
 		JobDetail jd = new JobDetail();
 		jd.setGroup(Scheduler.DEFAULT_GROUP);
 		jd.setJobClass(appTaskClass);
 		jd.setName(taskName);
+		jd.setDescription(description);
 		SimpleTrigger trigger = new SimpleTrigger(
 				new UIDGenerator().generate(), Scheduler.DEFAULT_GROUP);
 		trigger.setRepeatInterval(intervalInSeconds * 1000l);
