@@ -16,6 +16,8 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 import org.springframework.util.StringUtils;
 
+import cn.com.solex.utils.ReflectionUtils;
+
 import com.google.common.collect.Maps;
 
 import freemarker.template.Configuration;
@@ -68,25 +70,28 @@ public class MimeMailService {
 			if (templateName == null || "".equals(templateName)) {
 				templateName = "base.ftl";
 			}
-			template = freemarkerConfiguration.getTemplate(templateName,DEFAULT_ENCODING);
+			template = freemarkerConfiguration.getTemplate(templateName,
+					DEFAULT_ENCODING);
 			if (map == null || map.isEmpty()) {
 				map = Maps.newHashMap();
 			}
 			String context = FreeMarkerTemplateUtils.processTemplateIntoString(
 					template, map);
-			messageHelper.setText(context,true);
+			messageHelper.setText(context, true);
 			if (!(fileName == null || "".equals(fileName.trim()))) {
 				Map<String, Object> fileMap = generateAttachment(fileName);
 				messageHelper.addAttachment((String) fileMap.get("fileName"),
 						(File) fileMap.get("file"));
 			}
 			mailSender.send(message);
-			logger.info("HTML版邮件已发送至{}", StringUtils
-					.arrayToCommaDelimitedString(to));
+			logger.info("HTML版邮件已发送至{}",
+					StringUtils.arrayToCommaDelimitedString(to));
 		} catch (MessagingException e) {
 			logger.error("构造邮件失败", e);
+			throw ReflectionUtils.convertReflectionExceptionToUnchecked(e);
 		} catch (Exception e) {
 			logger.error("发送邮件失败", e);
+			throw ReflectionUtils.convertReflectionExceptionToUnchecked(e);
 		}
 
 	}
