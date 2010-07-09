@@ -28,7 +28,7 @@ public abstract class PeriodConsumer extends QueueConsumer {
 	/**
 	 * 线程执行函数,定期批量获取消息并调用processMessageList()处理.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void run() {
 		try {
 			while (!Thread.currentThread().isInterrupted()) {

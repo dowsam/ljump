@@ -41,13 +41,16 @@ public abstract class QueueConsumer implements Runnable {
 	protected int shutdownWait = 10000;
 
 	protected boolean persistence = true;
-	protected String persistencePath = System.getProperty("java.io.tmpdir") + File.separator + "queue";
+	protected String persistencePath = System.getProperty("java.io.tmpdir")
+			+ File.separator + "queue";
 	protected Object persistenceLock = new Object();
 
+	@SuppressWarnings("rawtypes")
 	protected BlockingQueue queue;
 	protected ExecutorService executor;
 
 	/**
+	 * 
 	 * 任务所消费的队列名称.
 	 */
 	public void setQueueName(String queueName) {
@@ -80,6 +83,7 @@ public abstract class QueueConsumer implements Runnable {
 	 */
 	@PostConstruct
 	public void start() throws IOException, ClassNotFoundException {
+		System.out.println("队列开始收集数据!!");
 		queue = QueuesHolder.getQueue(queueName);
 
 		if (persistence) {
@@ -104,6 +108,7 @@ public abstract class QueueConsumer implements Runnable {
 		try {
 			executor.shutdownNow();
 			executor.awaitTermination(shutdownWait, TimeUnit.MILLISECONDS);
+			System.out.println("队列结束!!");
 		} catch (InterruptedException e) {
 			logger.debug("awaitTermination被中断", e);
 		}
@@ -125,12 +130,17 @@ public abstract class QueueConsumer implements Runnable {
 		if (!list.isEmpty()) {
 			ObjectOutputStream oos = null;
 			try {
-				File file = new File(getPersistenceDir(), getPersistenceFileName());
-				oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(file)));
+				File file = new File(getPersistenceDir(),
+						getPersistenceFileName());
+				oos = new ObjectOutputStream(new BufferedOutputStream(
+						new FileOutputStream(file)));
 				for (Object message : list) {
 					oos.writeObject(message);
 				}
-				logger.info("队列{}已持久化{}个消息到{}", new Object[] { queueName, list.size(), file.getAbsolutePath() });
+				logger.info(
+						"队列{}已持久化{}个消息到{}",
+						new Object[] { queueName, list.size(),
+								file.getAbsolutePath() });
 			} finally {
 				if (oos != null) {
 					oos.close();
@@ -150,7 +160,8 @@ public abstract class QueueConsumer implements Runnable {
 
 		if (file.exists()) {
 			try {
-				ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(file)));
+				ois = new ObjectInputStream(new BufferedInputStream(
+						new FileInputStream(file)));
 				int count = 0;
 				while (true) {
 					try {
@@ -161,7 +172,9 @@ public abstract class QueueConsumer implements Runnable {
 						break;
 					}
 				}
-				logger.info("队列{}已从{}中恢复{}个消息.", new Object[] { queueName, file.getAbsolutePath(), count });
+				logger.info(
+						"队列{}已从{}中恢复{}个消息.",
+						new Object[] { queueName, file.getAbsolutePath(), count });
 			} finally {
 				if (ois != null) {
 					ois.close();
@@ -174,8 +187,7 @@ public abstract class QueueConsumer implements Runnable {
 	}
 
 	/**
-	 * 获取持久化文件路径.
-	 * 持久化文件默认路径为java.io.tmpdir/queue/队列名.
+	 * 获取持久化文件路径. 持久化文件默认路径为java.io.tmpdir/queue/队列名.
 	 * 如果java.io.tmpdir/queue/目录不存在,会进行创建.
 	 */
 	protected File getPersistenceDir() {
