@@ -1,5 +1,6 @@
 package cn.com.solex.email;
 
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -16,6 +17,12 @@ import cn.com.solex.concurrent.AsyncTokenFactory;
 import cn.com.solex.concurrent.AsyncTokenUtils;
 import cn.com.solex.concurrent.DefaultAsyncTokenFactory;
 
+/**
+ * 提供异步发送邮件,启动监听模式
+ * 
+ * @author l.xue.nong
+ * 
+ */
 public class AsyncJavaMailSender implements InitializingBean, DisposableBean,
 		BeanNameAware {
 
@@ -116,6 +123,58 @@ public class AsyncJavaMailSender implements InitializingBean, DisposableBean,
 					@Override
 					public void run() {
 						mimeMailService.send(from, to, subject);
+					}
+				});
+	}
+
+	public <T> AsyncToken<T> send(final String from, final String to,
+			final String subject, final String templateName,
+			final Map<String, Object> map) {
+		return AsyncTokenUtils.execute(executorService, asyncTokenFactory,
+				new Runnable() {
+					@Override
+					public void run() {
+						mimeMailService.send(from, to, subject, templateName,
+								map);
+					}
+				});
+	}
+
+	public <T> AsyncToken<T> send(final String from, final String[] to,
+			final String subject, final String templateName,
+			final Map<String, Object> map) {
+		return AsyncTokenUtils.execute(executorService, asyncTokenFactory,
+				new Runnable() {
+					@Override
+					public void run() {
+						mimeMailService.send(from, to, subject, templateName,
+								map);
+					}
+				});
+	}
+
+	public <T> AsyncToken<T> send(final String from, final String[] to,
+			final String subject, final String templateName,
+			final Map<String, Object> map, final String fileName) {
+		return AsyncTokenUtils.execute(executorService, asyncTokenFactory,
+				new Runnable() {
+					@Override
+					public void run() {
+						mimeMailService.send(from, to, subject, templateName,
+								map, fileName);
+					}
+				});
+	}
+
+	public <T> AsyncToken<T> send(final String from, final String to,
+			final String subject, final String templateName,
+			final Map<String, Object> map, final String fileName) {
+		return AsyncTokenUtils.execute(executorService, asyncTokenFactory,
+				new Runnable() {
+					@Override
+					public void run() {
+						mimeMailService.send(from, to, subject, templateName,
+								map, fileName);
 					}
 				});
 	}
