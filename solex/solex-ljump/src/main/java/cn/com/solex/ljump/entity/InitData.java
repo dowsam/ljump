@@ -113,6 +113,25 @@ public class InitData {
 		resource5.setPosition(Double.valueOf(5));
 		baseService.save(resource5);
 
+		SysResource resource6 = new SysResource();
+		resource6.setParentResource(resource);
+		resource6.setShowMenu(true);
+		resource6.setResourceType(SysResource.MENU_TYPE);
+		resource6.setValue("/system/quartz");
+		resource6.setValueName("计划任务");
+		resource6.setPosition(Double.valueOf(6));
+		baseService.save(resource6);
+
+		SysResource resource7 = new SysResource();
+		resource7.setParentResource(resource);
+		resource7.setShowMenu(true);
+		resource7.setResourceType(SysResource.MENU_TYPE);
+		resource7.setValue("/sendmsg");
+		resource7.setValueName("短信管理");
+		resource7.setPosition(Double.valueOf(7));
+		resource7.setAuthorityList(baseService.getAll(SysAuthority.class));
+		baseService.save(resource7);
+
 	}
 
 	private void initSysAuthority() {

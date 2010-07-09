@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ehcache>
 
-	<diskStore path="java.io.tmpdir/hibernate/ljump" />
+	<diskStore path="java.io.tmpdir/hibernate/solex-ljump" />
 
 
 	<!-- DefaultCache setting. -->

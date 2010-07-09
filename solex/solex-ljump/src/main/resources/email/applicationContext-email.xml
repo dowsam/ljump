@@ -34,7 +34,7 @@
 	<!-- 用于生成HTML邮件内容的Freemarker配置 -->
 	<bean id="freemarkerConfiguration"
 		class="org.springframework.ui.freemarker.FreeMarkerConfigurationFactoryBean">
-		<property name="templateLoaderPath" value="classpath:/template/email" />
+		<property name="templateLoaderPath" value="classpath:/email" />
 		<property name="freemarkerVariables">
 			<map>
 				<entry key="block">
@@ -48,6 +48,12 @@
 				</entry>
 			</map>
 		</property>
+	</bean>
+
+	<!-- 异步的邮件发送器 -->
+	<bean id="asyncJavaMailSender" class="cn.com.solex.email.AsyncJavaMailSender">
+		<property name="sendMailThreadPoolSize" value="3" />
+		<property name="mimeMailService" ref="mimeMailService" />
 	</bean>
 
 </beans>

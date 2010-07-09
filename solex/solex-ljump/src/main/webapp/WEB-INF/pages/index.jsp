@@ -32,7 +32,7 @@
 		</tr>
 		<tr>
 			<td class="odd">New</td>
-			<td class="odd">${pageContext.session.new}</td>
+			<td class="odd">${pageContext.session}</td>
 		</tr>
 		<tr>
 			<td>Creation time</td>
