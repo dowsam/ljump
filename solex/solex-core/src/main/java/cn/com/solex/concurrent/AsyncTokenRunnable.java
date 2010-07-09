@@ -2,6 +2,14 @@ package cn.com.solex.concurrent;
 
 import java.util.concurrent.Callable;
 
+/**
+ * 异步处理,线程类
+ * 
+ * @see java.lang.Runnable
+ * @author Administrator
+ * 
+ * @param <T>
+ */
 public class AsyncTokenRunnable<T> implements Runnable {
 	AsyncToken<T> asyncToken;
 	Runnable targetRunnable;

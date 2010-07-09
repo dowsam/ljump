@@ -5,6 +5,13 @@ import java.util.List;
 
 import org.springframework.util.Assert;
 
+/**
+ * 默认工厂类,主要生产异步监听器,
+ * 
+ * @see cn.com.solex.concurrent.IResponder
+ * @author L.xue.nong
+ * 
+ */
 public class DefaultAsyncTokenFactory implements AsyncTokenFactory {
 
 	private String tokenGroup = AsyncToken.DEFAULT_TOKEN_GROUP;
@@ -28,7 +35,7 @@ public class DefaultAsyncTokenFactory implements AsyncTokenFactory {
 		this.tokenName = tokenName;
 	}
 
-	public  List<IResponder> getResponders() {
+	public List<IResponder> getResponders() {
 		return responders;
 	}
 
