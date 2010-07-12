@@ -34,6 +34,11 @@
 			<artifactId>hibernate-annotations</artifactId>
 			<optional>true</optional>
 		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<optional>true</optional>
+		</dependency>
 
 		<!-- web -->
 		<dependency>
