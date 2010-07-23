@@ -60,7 +60,7 @@ public class BaseDao extends HibernateDao {
 		}
 
 		setPageParameter(q, page);
-		List result = q.list();
+		List<T> result = q.list();
 		page.setResult(result);
 		return page;
 	}
@@ -91,7 +91,7 @@ public class BaseDao extends HibernateDao {
 
 		setPageParameter(q, page);
 
-		List result = q.list();
+		List<T> result = q.list();
 		page.setResult(result);
 		return page;
 	}
@@ -119,7 +119,7 @@ public class BaseDao extends HibernateDao {
 		}
 
 		setPageParameter(c, page);
-		List result = c.list();
+		List<T> result = c.list();
 		page.setResult(result);
 		return page;
 	}

@@ -83,7 +83,6 @@ public abstract class QueueConsumer implements Runnable {
 	 */
 	@PostConstruct
 	public void start() throws IOException, ClassNotFoundException {
-		System.out.println("队列开始收集数据!!");
 		queue = QueuesHolder.getQueue(queueName);
 
 		if (persistence) {

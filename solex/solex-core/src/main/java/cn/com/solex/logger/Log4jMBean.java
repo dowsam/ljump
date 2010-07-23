@@ -96,7 +96,7 @@ public class Log4jMBean {
 	/**
 	 * 获取Logger的所有Appender的名称.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	private List<String> getLoggerAppenders(Logger logger) {
 		List<String> appenderNameList = new ArrayList<String>();
 		// 循环加载logger及其parent的appenders

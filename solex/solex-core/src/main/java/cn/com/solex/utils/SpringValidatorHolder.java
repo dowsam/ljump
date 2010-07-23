@@ -18,7 +18,7 @@ import org.springframework.validation.Validator;
  * <pre>
  * spring配置:
  * &lt;bean class="cn.com.solex.utils.SpringValidatorHolder">
- * 	 &lt;preperty name="validator" ref="validator"/>
+ * 	 &lt;property name="validator" ref="validator"/>
  * &lt;/bean>
  * </pre>
  * 
@@ -26,7 +26,6 @@ import org.springframework.validation.Validator;
  * 
  */
 public class SpringValidatorHolder implements InitializingBean {
-
 	private static Validator validator;
 
 	@Override

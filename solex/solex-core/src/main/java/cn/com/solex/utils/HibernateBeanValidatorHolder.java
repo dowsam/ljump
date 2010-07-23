@@ -20,7 +20,7 @@ import org.springframework.beans.factory.InitializingBean;
  * <pre>
  * spring配置:
  * &lt;bean class="cn.com.solex.utils.HibernateBeanValidatorHolder">
- * 	 &lt;preperty name="validator" ref="validator"/>
+ * 	 &lt;property name="validator" ref="validator"/>
  * &lt;/bean>
  * </pre>
  * 
