@@ -6,25 +6,49 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
+	<mvc:annotation-driven />
 
 	<context:component-scan base-package="cn.com.solex.ljump.controller" />
-	<mvc:annotation-driven />
 	<mvc:view-controller path="/" view-name="/welcome" />
 
 	<!-- Configures Handler Interceptors -->
 	<mvc:interceptors>
-		<!--
-			Changes the locale when a 'locale' request parameter is sent; e.g.
-			/?locale=de
-		-->
+		<!-- Changes the locale when a 'locale' request parameter is sent; e.g. 
+			/?locale=de -->
 		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
 	</mvc:interceptors>
+
+	<!-- 可以在国际化文件中使用如key: NotBlank.userInfo.username 或是NotBlank(message="用户名不能为空") -->
+
+	<!-- 用于启用Hibernate Validator,并且使用spring MessageSource替换java ResourceBundle -->
+	<bean id="validator"
+		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+		<property name="messageInterpolator" ref="messageInterpolator" />
+	</bean>
+
+	<bean id="messageInterpolator"
+		class="org.hibernate.validator.messageinterpolation.ResourceBundleMessageInterpolator">
+		<constructor-arg ref="resourceBundleLocator"></constructor-arg>
+	</bean>
+
+	<bean id="resourceBundleLocator" class="cn.com.solex.utils.MessageSourceResourceBundleLocator">
+		<property name="messageSource" ref="messageSource" />
+	</bean>
 
 	<!-- Application Message Bundle -->
 	<bean id="messageSource"
 		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 		<property name="basename" value="/WEB-INF/messages/messages" />
+		<property name="defaultEncoding" value="UTF-8" />
 		<property name="cacheSeconds" value="0" />
+	</bean>
+
+	<bean class="cn.com.solex.utils.HibernateBeanValidatorHolder">
+		<property name="validator" ref="validator" />
+	</bean>
+
+	<bean class="cn.com.solex.utils.SpringValidatorHolder">
+		<property name="validator" ref="validator" />
 	</bean>
 
 	<!-- Saves a locale change using a cookie -->
@@ -64,13 +88,9 @@
 				<bean
 					class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
 				<!-- for application/xml -->
-				<!--
-					<bean
-					class="org.springframework.web.servlet.view.xml.MarshallingView" >
-					<property name="marshaller"> <bean
-					class="org.springframework.oxm.xstream.XStreamMarshaller"/>
-					</property> </bean>
-				-->
+				<!-- <bean class="org.springframework.web.servlet.view.xml.MarshallingView" 
+					> <property name="marshaller"> <bean class="org.springframework.oxm.xstream.XStreamMarshaller"/> 
+					</property> </bean> -->
 			</list>
 		</property>
 	</bean>
