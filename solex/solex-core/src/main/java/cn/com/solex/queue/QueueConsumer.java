@@ -107,7 +107,6 @@ public abstract class QueueConsumer implements Runnable {
 		try {
 			executor.shutdownNow();
 			executor.awaitTermination(shutdownWait, TimeUnit.MILLISECONDS);
-			System.out.println("队列结束!!");
 		} catch (InterruptedException e) {
 			logger.debug("awaitTermination被中断", e);
 		}

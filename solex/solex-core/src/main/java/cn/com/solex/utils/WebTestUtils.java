@@ -1,20 +1,14 @@
 package cn.com.solex.utils;
 
-import java.util.HashMap;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.struts2.ServletActionContext;
 import org.springframework.context.ApplicationContext;
 import org.springframework.mock.web.MockServletContext;
 import org.springframework.web.context.ConfigurableWebApplicationContext;
 import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.XmlWebApplicationContext;
-
-import com.opensymphony.xwork2.ActionContext;
 
 /**
  * Web集成测试工具类.
@@ -26,7 +20,6 @@ import com.opensymphony.xwork2.ActionContext;
  */
 public class WebTestUtils {
 
-	private static boolean struts2ContextInited = false;
 
 	/**
 	 * 在ServletContext里初始化Spring WebApplicationContext.
@@ -69,32 +62,4 @@ public class WebTestUtils {
 		new ContextLoader().closeWebApplicationContext(servletContext);
 	}
 
-	/**
-	 * 将request放入Struts2的ServletActionContext,支持Struts2待测代码用ServletActionContext
-	 * .getRequest()取出MockRequest.
-	 */
-	public static void setRequestToStruts2(HttpServletRequest request) {
-		initStruts2ActionContext();
-		ServletActionContext.setRequest(request);
-	}
-
-	/**
-	 * 将response放入Struts2的ServletActionContext,
-	 * 支持Struts2待测代码用ServletActionContext.getResponse()取出MockResponse.
-	 */
-	public static void setResponseToStruts2(HttpServletResponse response) {
-		initStruts2ActionContext();
-		ServletActionContext.setResponse(response);
-	}
-
-	/**
-	 * 初始化 Struts2 ActionContext.
-	 */
-	@SuppressWarnings("unchecked")
-	private static void initStruts2ActionContext() {
-		if (!struts2ContextInited) {
-			ActionContext.setContext(new ActionContext(new HashMap()));
-			struts2ContextInited = true;
-		}
-	}
 }
