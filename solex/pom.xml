@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>cn.com.solex</groupId>
 	<artifactId>solex</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1.0</version>
 	<packaging>pom</packaging>
 	<name>Solex's Project</name>
 	<modules>
@@ -11,4 +11,19 @@
 		<module>solex-core</module>
 		<module>solex-ljump</module>
 	</modules>
+	
+	 <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    
+     <scm>
+        <connection>scm:svn:http://ljump.googlecode.com/svn/solex</connection>
+        <developerConnection>scm:svn:https://ljump.googlecode.com/svn/solex</developerConnection>
+        <url>http://ljump.googlecode.com/svn/solex</url>
+    </scm>
+	
 </project>
