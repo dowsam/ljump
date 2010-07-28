@@ -16,12 +16,15 @@
 	media="all" />
 <link rel="stylesheet" type="text/css" href="${base}/css/style.css" />
 <link type="text/css" rel="stylesheet" href="${base}/css/sdmenu.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="${base}/js/jqgrid/css/ui.jqgrid.css" />
 <script src="${base}/js/jquery-1.3.2.min.js"></script>
 <script src="${base}/js/jquery-ui-1.7.1.custom.js"></script>
 <script src="${base}/js/components.js"></script>
 <script src="${base}/js/effects.js"></script>
 <script type="text/javascript" src="${base}/js/sdmenu.js"></script>
 <script type="text/javascript" src="${base}/js/rest.js"></script>
+<script src="${base}/js/jqgrid/js/grid.locale-en.js" type="text/javascript"></script>
+<script src="${base}/js/jqgrid/js/jquery.jqGrid.min.js" type="text/javascript"></script>
 <jsptag:block name="head">
 </jsptag:block>
 <!--[if IE 6]>
