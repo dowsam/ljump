@@ -4,7 +4,7 @@
 	<parent>
 		<artifactId>solex-parent</artifactId>
 		<groupId>cn.com.solex</groupId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>0.1.0</version>
 		<relativePath>.../solex-parent/pom.xml</relativePath>
 	</parent>
 	<artifactId>solex-core</artifactId>
@@ -42,11 +42,6 @@
 
 		<!-- web -->
 		<dependency>
-			<groupId>org.apache.struts</groupId>
-			<artifactId>struts2-core</artifactId>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 			<optional>true</optional>
@@ -56,8 +51,19 @@
 			<artifactId>servlet-api</artifactId>
 			<optional>true</optional>
 		</dependency>
-		
-		<!-- memcached begin-->
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		<!-- memcached begin -->
 		<dependency>
 			<groupId>spy</groupId>
 			<artifactId>memcached</artifactId>
