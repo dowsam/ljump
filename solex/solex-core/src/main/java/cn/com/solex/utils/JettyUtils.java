@@ -17,6 +17,7 @@ public class JettyUtils {
 		Server server = new Server(port);
 		WebAppContext webContext = new WebAppContext("src/main/webapp", contextPath);
 		webContext.setClassLoader(Thread.currentThread().getContextClassLoader());
+		webContext.setDefaultsDescriptor("webdefault.xml");
 		server.setHandler(webContext);
 		server.setStopAtShutdown(true);
 		return server;
