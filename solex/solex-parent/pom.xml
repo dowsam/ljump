@@ -129,6 +129,8 @@
 			<url>http://localhost:8081/nexus/content/repositories/snapshots</url>
 			<uniqueVersion>false</uniqueVersion>
 		</snapshotRepository>
+		<!-- <repository> <id>ljump</id> <name>Solex's Project</name> <url>http://ljump.googlecode.com/svn/repository</url> 
+			</repository> -->
 	</distributionManagement>
 
 	<!-- 预定义依赖项的version,scope与exclusions,子项目中只需定义groupId 和 artifactId 即可 -->
@@ -291,14 +293,9 @@
 			<dependency>
 				<groupId>javax.servlet</groupId>
 				<artifactId>jstl</artifactId>
-				<version>1.1.2</version>
+				<version>1.2</version>
 			</dependency>
-
-			<dependency>
-				<groupId>taglibs</groupId>
-				<artifactId>standard</artifactId>
-				<version>1.1.2</version>
-			</dependency>
+		
 			<!-- web end -->
 
 			<!-- webservice begin -->
