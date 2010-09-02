@@ -4,7 +4,7 @@
 	<parent>
 		<artifactId>solex-parent</artifactId>
 		<groupId>cn.com.solex</groupId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>0.1.0</version>
 		<relativePath>../../solex-parent/pom.xml</relativePath>
 	</parent>
 	<groupId>cn.com.solex</groupId>
