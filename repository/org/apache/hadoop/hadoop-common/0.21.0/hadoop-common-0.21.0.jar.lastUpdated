@@ -1,0 +1,5 @@
+#NOTE: This is an internal implementation file, its format can be changed without prior notice.
+#Wed Apr 11 18:19:24 CST 2012
+49bb5508f9a5d7090c87a6940828f49298872f68@default-http\://220.160.111.130\:8081/nexus/content/groups/public/.lastUpdated=1334139368755
+http\://repo1.maven.org/maven2/.lastUpdated=1334139564190
+http\://220.160.111.130\:8081/nexus/content/groups/public/.error=Could not transfer artifact org.apache.hadoop\:hadoop-common\:jar\:0.22.0 from/to nexus (http\://220.160.111.130\:8081/nexus/content/groups/public)\: No response received after 60000
