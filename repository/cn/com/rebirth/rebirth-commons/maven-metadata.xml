@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>cn.com.rebirth</groupId>
+  <artifactId>rebirth-commons</artifactId>
+  <versioning>
+    <versions>
+      <version>0.0.1.RC1-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20120706135434</lastUpdated>
+  </versioning>
+</metadata>
